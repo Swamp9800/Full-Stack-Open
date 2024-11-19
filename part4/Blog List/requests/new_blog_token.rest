@@ -1,0 +1,9 @@
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RpbmciLCJpZCI6IjY3M2M4MDY3Zjc5YWJkY2NmYzk3NmNmYSIsImlhdCI6MTczMjAxODc1OH0.QDfEB1GCA8UK-cqbwOJzbpJ7Q-Q1MXY5AldVPBtsn8I
+
+{
+  "title": "testing adding new blog to database",
+  "url": "testing adding new blog to database",
+  "author": "testing adding new blog to database"
+}
