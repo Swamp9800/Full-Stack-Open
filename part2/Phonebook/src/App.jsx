@@ -15,7 +15,7 @@ const App = () => {
 
   useEffect(() => {
     phonebook
-      .getAll('http://localhost:3001/persons')
+      .getAll()
       .then(people => {
         console.log(people);
         setPersons(people)
@@ -25,6 +25,7 @@ const App = () => {
   const addName = (event) => {
     event.preventDefault()
     console.log('button clicked', event.target);
+
     if (persons.some(person => person.name === newName)) {
       const existingPerson = persons.find(person => person.name === newName)
       
@@ -32,15 +33,15 @@ const App = () => {
         const personObject = {
           name: newName,
           number: newNumber,
-          id: existingPerson.id
+          _id: existingPerson._id
         }
         phonebook
-          .update(existingPerson.id, personObject)
+          .update(existingPerson._id, personObject)
           .then(returnedPerson => {
             setPersons(persons.map(person => person.name === personObject.name ? returnedPerson : person))
             setSucceed(true)
             setErrorMessage(
-              `Changed number of ${person.name}`
+              `Changed number of ${returnedPerson.name}`
             )
             setTimeout(() => {
               setErrorMessage(null)
@@ -48,9 +49,8 @@ const App = () => {
           })
           .catch(error => {
             setSucceed(false)
-            setErrorMessage(
-              `Information of ${existingPerson.name} has already been removed from server`
-            )
+            console.log(error.response.data.error)
+            setErrorMessage(error.response.data.error)
             setTimeout(() => {
               setErrorMessage(null)
             }, 5000);
@@ -76,6 +76,14 @@ const App = () => {
             setErrorMessage(null)
           }, 5000);
         })
+        .catch(error => {
+          console.log(error.response.data.error)
+          setSucceed(false)
+          setErrorMessage(error.response.data.error)
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000);
+        })
     }
   }
 
@@ -83,12 +91,13 @@ const App = () => {
   const handleNumberChange = (event) => setNewNumber(event.target.value)
   const handleSearchChange = (event) => setSearchTerm(event.target.value)
 
-  const toggleDelete = (id, name) => {
+  const toggleDelete = (_id, name) => {
+    console.log(_id);
     if (window.confirm(`Are you sure you want to delete ${name}?`)) {
       phonebook
-        .delPerson(id)
+        .delPerson(_id)
         .then(() => {
-          setPersons(persons.filter(person => person.id !== id))
+          setPersons(persons.filter(person => person._id !== _id))
         })
         .catch(error => {
           console.error("Error deleting person:", error)

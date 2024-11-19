@@ -10,7 +10,7 @@ const People = ({persons, searchTerm, toggleDelete}) => {
     return (
       <div>
         {PersonsToShow.map(person =>
-          <Person key={person.id} person={person} toggleDelete={() => toggleDelete(person.id, person.name)}/>
+          <Person key={person.id} person={person} toggleDelete={() => toggleDelete(person._id, person.name)}/>
         )}
       </div>
     )
