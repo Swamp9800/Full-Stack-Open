@@ -1,0 +1,8 @@
+post http://localhost:3001/api/blogs
+Content-Type: application/json
+
+{
+    "title": "testing adding new blog to db",
+    "url": "testing adding new blog to db",
+    "author": "testing adding new blog to db"
+}
