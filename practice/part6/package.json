@@ -1,0 +1,25 @@
+{
+  "name": "part6",
+  "version": "1.0.0",
+  "description": "part6",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js",
+    "build": "node build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "redux": "^5.0.1"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.25.9",
+    "deep-freeze": "^0.0.1",
+    "eslint-plugin-jest": "^28.9.0",
+    "jest": "^29.7.0"
+  }
+}
